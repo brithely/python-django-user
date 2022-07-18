@@ -1,0 +1,14 @@
+# Core Framework
+Django==3.2.14
+djangorestframework==3.13.1
+asgiref==3.5.2
+pytz==2022.1
+sqlparse==0.4.2
+
+# JWT Authentication
+PyJWT==2.4.0
+djangorestframework-simplejwt==5.2.0
+
+# Docs
+drf-yasg==1.21.3
+
