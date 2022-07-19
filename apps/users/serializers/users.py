@@ -1,11 +1,32 @@
-from users.models.users import User
+from rest_framework import serializers
+
+from users.models import users as user_models
 
 
-def serializer_user(user: User) -> dict:
-    result = dict()
-    result["id"] = user.id
-    result["name"] = user.name
-    result["nickname"] = user.nickname
-    result["phone_number"] = user.phone_number
-    result["created_at"] = user.created_at.astimezone()
-    return result
+class UserSignUpSerializer(serializers.Serializer):
+    key = serializers.CharField()
+    email = serializers.EmailField()
+    password = serializers.CharField()
+    name = serializers.CharField()
+    nickname = serializers.CharField()
+
+
+class UserSignInSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=False)
+    phone_number = serializers.CharField(required=False)
+    password = serializers.CharField()
+
+
+class UserTokenSerializer(serializers.Serializer):
+    token = serializers.CharField()
+
+
+class ResetPasswordSerializer(serializers.Serializer):
+    key = serializers.CharField()
+    password = serializers.CharField()
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = user_models.User
+        fields = ["email", "name", "nickname", "created_at", "last_login"]
